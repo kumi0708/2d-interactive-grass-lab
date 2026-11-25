@@ -1,0 +1,55 @@
+:root {
+  --bg: #0a1410;
+  --panel: rgba(10, 22, 18, 0.82);
+  --line: rgba(166, 214, 120, 0.22);
+  --text: #e6f2d8;
+  --muted: #9db58e;
+  --accent: #a5d35c;
+  --off: #5b6b58;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text);
+  font: 13px/1.4 ui-monospace, "SF Mono", Menlo, Consolas, monospace; overflow: hidden; }
+#app { position: fixed; inset: 0; display: grid; place-items: center; }
+#stage { position: relative; touch-action: none; box-shadow: 0 0 0 2px #050a08, 0 20px 60px rgba(0,0,0,.6); }
+#game { display: block; image-rendering: pixelated; image-rendering: crisp-edges; }
+#overlay { position: absolute; inset: 0; pointer-events: none; }
+
+.panel { position: fixed; background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+#hud { top: 12px; left: 12px; padding: 10px 12px; max-width: min(560px, calc(100vw - 24px)); }
+#hud h1 { margin: 0; font-size: 15px; letter-spacing: .04em; }
+#hud h1 span { color: var(--accent); }
+#hud .sub { margin: 2px 0 8px; color: var(--muted); font-size: 12px; }
+.toggles { display: flex; flex-wrap: wrap; gap: 6px; }
+.toggles button { font: inherit; font-size: 12px; color: var(--text); background: rgba(255,255,255,.04);
+  border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; cursor: pointer; display: flex; gap: 6px; align-items: center; }
+.toggles button.on { border-color: var(--accent); background: rgba(165, 211, 92, .16); }
+.toggles button.off { color: var(--off); }
+kbd { font: inherit; font-size: 10px; padding: 0 4px; border-radius: 3px; background: rgba(255,255,255,.1); color: var(--muted); }
+
+#params { top: 12px; right: 12px; width: 260px; padding: 10px 12px; max-height: calc(100vh - 24px); overflow: auto; }
+#params.hidden { display: none; }
+#params h2 { font-size: 12px; margin: 10px 0 4px; color: var(--accent); }
+#params h2:first-child { margin-top: 0; }
+#params label { display: grid; grid-template-columns: 1fr 44px; gap: 2px 8px; font-size: 11px; color: var(--muted); margin: 4px 0; }
+#params input { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); }
+#params output { text-align: right; color: var(--text); }
+#params .row { display: flex; gap: 6px; margin-top: 8px; }
+#params .row button { flex: 1; font: inherit; font-size: 11px; color: var(--text); background: rgba(255,255,255,.06);
+  border: 1px solid var(--line); border-radius: 6px; padding: 4px; cursor: pointer; }
+
+#stats { bottom: 12px; left: 12px; padding: 6px 10px; font-size: 11px; color: var(--muted); }
+
+body.capture .panel { display: none; }
+body.capture #stage { box-shadow: none; }
+body.clean .panel { display: none; }
+
+@media (max-width: 720px) {
+  #hud { top: 8px; left: 8px; right: 8px; padding: 8px; }
+  #hud .sub { display: none; }
+  .toggles button { padding: 3px 6px; font-size: 11px; }
+  kbd { display: none; }
+  #params { top: auto; bottom: 8px; right: 8px; left: 8px; width: auto; max-height: 45vh; }
+  #stats { display: none; }
+}
